@@ -1,10 +1,10 @@
 import React from "react";
-import Selector from "../components/Selector";
-import Payment from "../components/Payment";
-import "../styles/BookingForm.css";
+import Selector from "./Selector";
+import Payment from "./Payment";
+import "../styles/OrderForm.css";
 import OccaisonIcon from "../assests/occaison.png";
 
-const BookingForm = () => {
+const OrderForm = () => {
 	return (
 		<>
 			<h2>Billing information</h2>
@@ -51,47 +51,17 @@ const BookingForm = () => {
 						/>
 					</label>
 				</div>
-				<div className="form-group dateAndTime">
-					<label className="text-20" htmlFor="email">
-						Date
-						<span className="required">*</span>
-						<br />
-						<input type="date" className="text-16" id="name" name="date" />
-					</label>
-					<label className="text-20" htmlFor="email">
-						Time
-						<span className="required">*</span>
-						<br />
-						<input type="time" className="text-16" id="time" name="time" />
-					</label>
-				</div>
 				<div className="form-group">
-					<label className="text-20" htmlFor="email">
-						Occasion
-						<span className="required">*</span>
-						<br />
-						<Selector
-							label="Occasion"
-							icon={OccaisonIcon}
-							options={[
-								{ label: "Birthday", value: "birthday" },
-								{ label: "Engagement", value: "engagement" },
-								{ label: "Anniversary", value: "anniversary" },
-							]}
-						/>
-					</label>
-				</div>
-				<div className="form-group">
-					<label className="text-20" htmlFor="email">
-						Seats
+					<label className="text-20" htmlFor="name">
+						Address
 						<span className="required">*</span>
 						<br />
 						<input
-							type="number"
+							type="text"
 							className="text-16"
-							id="seats"
-							name="seats"
-							placeholder="Seats"
+							id="name"
+							name="name"
+							placeholder="Name"
 						/>
 					</label>
 				</div>
@@ -105,4 +75,4 @@ const BookingForm = () => {
 	);
 };
 
-export default BookingForm;
+export default OrderForm;

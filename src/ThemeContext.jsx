@@ -11,7 +11,7 @@ const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ Theme, handleThemeSwitch }}>
-      <div className="container">
+      <div className="">
         <div className={`${Theme === "light" ? "dark-theme app-dark" : ""}`}>
           {children}
         </div>
