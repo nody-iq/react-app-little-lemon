@@ -10,7 +10,6 @@ import { Routes, Route, Link } from "react-router-dom";
 const Footer = () => {
 	return (
 		<>
-			<div className="spacer"></div>
 			<footer className="footer container bg-primary">
 				<div>
 					<div className="logo">

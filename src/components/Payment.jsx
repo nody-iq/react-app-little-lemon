@@ -1,61 +1,73 @@
 import React from "react";
 import "../styles/Payment.css";
-import Button from "../components/Button";
-const Payment = ({ label, options, icon }) => {
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+const Payment = ({ touched, errors }) => {
 	return (
 		<>
 			<h2>Payment</h2>
-			<form action="" method="post">
-				<div className="form-group">
-					<label className="text-20" htmlFor="ccNumber">
-						CC Number
-						<span className="required">*</span>
-						<br />
-						<input
-							type="number"
-							className="text-16"
-							id="ccNumber"
-							name="ccNumber"
-							placeholder="CC Number"
-						/>
-					</label>
-				</div>
-				<div className="form-group exp-ccv">
-					<label className="text-20" htmlFor="expire">
-						Expire
-						<span className="required">*</span>
-						<br />
-						<input
-							type="month"
-							className="text-16"
-							id="exp"
-							name="exp"
-							placeholder="Expire"
-						/>
-					</label>
-					<label className="text-20" htmlFor="ccv">
-						CCV
-						<span className="required">*</span>
-						<br />
-						<input
-							type="number"
-							className="text-16"
-							id="ccv"
-							name="ccv"
-							placeholder="CCV"
-						/>
-					</label>
-				</div>
-				<div className="form-group pt-5">
-					<Button
-						styles={{
-							width: "100%",
-							height: "50px",
-						}}
-						title="Submit & Pay"
+			<div className="form-group">
+				<label className="text-20" htmlFor="ccNumber">
+					CC Number
+					<span className="required">*</span>
+					<br />
+					<Field
+						type="number"
+						className={`text-16 ${
+							errors.ccNumber && touched.ccNumber && "invalidField"
+						}`}
+						id="ccNumber"
+						name="ccNumber"
 					/>
-				</div>
-			</form>
+					{errors.ccNumber && touched.ccNumber && (
+						<ErrorMessage
+							name="ccNumber"
+							componint="div"
+							render={(msg) => <div className="errorMsg">{msg}</div>}
+						/>
+					)}
+				</label>
+			</div>
+			<div className="form-group exp-ccv">
+				<label className="text-20" htmlFor="expiration">
+					Expire
+					<span className="required">*</span>
+					<br />
+					<Field
+						type="month"
+						className={`text-16 ${
+							errors.expiration && touched.expiration && "invalidField"
+						}`}
+						id="expiration"
+						name="expiration"
+					/>
+					{errors.expiration && touched.expiration && (
+						<ErrorMessage
+							name="expiration"
+							componint="div"
+							render={(msg) => <div className="errorMsg">{msg}</div>}
+						/>
+					)}
+				</label>
+				<label className="text-20" htmlFor="ccv">
+					CCV
+					<span className="required">*</span>
+					<br />
+					<Field
+						type="number"
+						className={`text-16 ${errors.ccv && touched.ccv && "invalidField"}`}
+						id="ccv"
+						name="ccv"
+					/>
+					{errors.ccv && touched.ccv && (
+						<ErrorMessage
+							name="ccv"
+							componint="div"
+							render={(msg) => <div className="errorMsg">{msg}</div>}
+						/>
+					)}
+				</label>
+			</div>
 		</>
 	);
 };

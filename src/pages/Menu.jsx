@@ -128,6 +128,7 @@ const Menu = () => {
 					</div>
 				</div>
 			</section>
+			<div className="spacer"></div>
 		</>
 	);
 };

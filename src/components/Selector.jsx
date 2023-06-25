@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Selector.css";
 
-const Selector = ({ label, options, icon }) => {
+const Selector = ({ label, options, icon, handleChange }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [selected, setSelected] = React.useState(label);
 
@@ -12,12 +12,12 @@ const Selector = ({ label, options, icon }) => {
 				onClick={() => setIsOpen(!isOpen)}
 			>
 				<img src={icon} alt="icon" />
-				<p className={!isOpen && "text-light"}>{selected}</p>
+				<p className={`${!isOpen ? "text-light" : ""}`}>{selected}</p>
 
 				{isOpen ? (
-					<i class="bi bi-chevron-down"></i>
+					<i className="bi bi-chevron-down"></i>
 				) : (
-					<i class="bi bi-chevron-up text-light"></i>
+					<i className="bi bi-chevron-up text-light"></i>
 				)}
 			</div>
 			{isOpen && (
@@ -30,7 +30,9 @@ const Selector = ({ label, options, icon }) => {
 								onClick={() => {
 									setSelected(option.label);
 									setIsOpen(!isOpen);
+									handleChange(option.value);
 								}}
+								data-testid="initialTime"
 							>
 								{option.label}
 							</div>

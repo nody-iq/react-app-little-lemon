@@ -179,6 +179,7 @@ const About = () => {
 					</div>
 				</div>
 			</section>
+			<div className="spacer"></div>
 		</div>
 	);
 };

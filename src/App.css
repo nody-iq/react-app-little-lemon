@@ -33,6 +33,17 @@ a {
 	text-decoration: none;
 }
 
+.invalidField {
+	border: 1px solid #d30000 !important;
+}
+
+.errorMsg {
+	margin-top: 8px;
+	margin-left: 10px;
+	color: #d30000;
+	font-style: normal;
+	font-size: 18px;
+}
 .block {
 	width: 100%;
 }

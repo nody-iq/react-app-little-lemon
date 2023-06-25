@@ -1,9 +1,11 @@
 import React from "react";
 import OrderForm from "../components/OrderForm";
 import "../styles/OrderOnline.css";
+import { useNavigate } from "react-router-dom";
+import { fetchAPI, submitAPI } from "../utilities/api";
 
 const OrderOnline = () => {
-	const [counter, setName] = React.useState();
+	const navigate = useNavigate();
 	const cart = [
 		{
 			id: 1,
@@ -30,6 +32,11 @@ const OrderOnline = () => {
 				"Thai stir-fried noodle dish that combines rice noodles, shrimp or chicken (or both), eggs, bean sprouts, and a flavorful sauce. The dish is typically cooked quickly over high heat, with the noodles absorbing the sweet, tangy, and savory flavors of the sauce.",
 		},
 	];
+
+	const handleSubmit = (data) => {
+		submitAPI(data);
+		navigate("/thank-you");
+	};
 
 	return (
 		<>
@@ -90,9 +97,11 @@ const OrderOnline = () => {
 
 			<section className="container">
 				<div>
-					<OrderForm />
+					<OrderForm handleSubmit={handleSubmit} />
 				</div>
 			</section>
+
+			<div className="spacer"></div>
 		</>
 	);
 };
