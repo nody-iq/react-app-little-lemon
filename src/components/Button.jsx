@@ -1,11 +1,19 @@
 import React from "react";
+import "../styles/Button.css";
 
 const Button = (props) => {
-  return (
-    <div className="card">
-      <div className="card-body"></div>
-    </div>
-  );
+	return (
+		<>
+			<button
+				data-testid="submit"
+				type="submit"
+				className={`button text-bold text-16`}
+				style={props.styles}
+			>
+				{props.title}
+			</button>
+		</>
+	);
 };
 
 export default Button;

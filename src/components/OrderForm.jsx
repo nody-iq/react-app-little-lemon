@@ -1,23 +1,16 @@
 import React from "react";
-import Selector from "../components/Selector";
-import Payment from "../components/Payment";
-import "../styles/BookingForm.css";
-import OccaisonIcon from "../assests/occaison.png";
+import Payment from "./Payment";
+import "../styles/OrderForm.css";
 import Button from "../components/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-const BookingForm = (props) => {
-	const [occasion, setOccasion] = React.useState("");
-	const [time, setTime] = React.useState("");
-
+const OrderForm = (props) => {
 	const initialValues = {
 		name: "",
 		email: "",
 		phoneNumber: "",
-		date: "",
-		occasion: occasion,
-		time: time,
+		address: "",
 		ccNumber: "",
 		expiration: "",
 		ccv: "",
@@ -31,13 +24,7 @@ const BookingForm = (props) => {
 			.min(10, "Phone number must be at least 10 digits")
 			.max(15, "Phone number can be at most 15 digits")
 			.required("Phone number is required"),
-		date: Yup.date().required("Date is required"),
-		occasion: Yup.string().required("Occaison is required"),
-		time: Yup.string().required("Occaison is required"),
-		seats: Yup.number()
-			.required("Seats is Required")
-			.positive("Must be a positive number")
-			.integer("Must be an integer"),
+		address: Yup.string().required("field is required"),
 		ccNumber: Yup.string()
 			.matches(/^\d{16}$/, "Invalid credit card number")
 			.required("Credit card number is required"),
@@ -46,7 +33,6 @@ const BookingForm = (props) => {
 			.matches(/^\d{3}$/, "Invalid CCV")
 			.required("CCV is required"),
 	});
-
 	return (
 		<>
 			<h2>Billing information</h2>
@@ -90,7 +76,6 @@ const BookingForm = (props) => {
 									id="email"
 									name="email"
 									placeholder="Email Address"
-									data-testid="email"
 									className={`text-16 ${
 										errors.email && touched.email && "invalidField"
 									}`}
@@ -99,11 +84,7 @@ const BookingForm = (props) => {
 									<ErrorMessage
 										name="email"
 										componint="div"
-										render={(msg) => (
-											<div className="errorMsg" data-testid="emailError">
-												{msg}
-											</div>
-										)}
+										render={(msg) => <div className="errorMsg">{msg}</div>}
 									/>
 								)}
 							</label>
@@ -131,104 +112,23 @@ const BookingForm = (props) => {
 								)}
 							</label>
 						</div>
-						<div className="form-group dateAndTime">
-							<label className="text-20" htmlFor="date">
-								Date {initialValues.date}
-								<span className="required">*</span>
-								<br />
-								<Field name="date">
-									{({ field, meta }) => (
-										<>
-											<input
-												type="date"
-												className={`text-16 ${
-													errors.date && touched.date && "invalidField"
-												}`}
-												data-testid="date"
-												onChange={(e) => {
-													props.updateTimes(e);
-													values.date = e.target.value;
-												}}
-											/>
-										</>
-									)}
-								</Field>
-								{errors.date && touched.date && (
-									<ErrorMessage
-										name="date"
-										componint="div"
-										render={(msg) => <div className="errorMsg">{msg}</div>}
-									/>
-								)}
-							</label>
-							<label className="text-20" htmlFor="time">
-								Available Time
-								<span className="required">*</span>
-								<br />
-								<Selector
-									label="Times"
-									icon={OccaisonIcon}
-									options={props.availableTimes.map((time) => {
-										return { label: time, value: time };
-									})}
-									handleChange={(value) => {
-										setTime(value);
-										values.time = value;
-									}}
-								/>
-								{errors.time && (
-									<ErrorMessage
-										name="time"
-										componint="div"
-										render={(msg) => <div className="errorMsg">{msg}</div>}
-									/>
-								)}
-							</label>
-						</div>
 						<div className="form-group">
-							<label className="text-20" htmlFor="occasion">
-								Occasion
-								<span className="required">*</span>
-								<br />
-								<Selector
-									label="Occasion"
-									icon={OccaisonIcon}
-									options={[
-										{ label: "Birthday", value: "birthday" },
-										{ label: "Engagement", value: "engagement" },
-										{ label: "Anniversary", value: "anniversary" },
-									]}
-									handleChange={(value) => {
-										setOccasion(value);
-										values.occasion = value;
-									}}
-								/>
-								{errors.occasion && (
-									<ErrorMessage
-										name="occasion"
-										componint="div"
-										render={(msg) => <div className="errorMsg">{msg}</div>}
-									/>
-								)}
-							</label>
-						</div>
-						<div className="form-group">
-							<label className="text-20" htmlFor="seats">
-								Seats
+							<label className="text-20" htmlFor="address">
+								Fullname
 								<span className="required">*</span>
 								<br />
 								<Field
-									type="number"
+									type="text"
+									id="address"
+									name="address"
+									placeholder="Address"
 									className={`text-16 ${
-										errors.seats && touched.date && "invalidField"
+										errors.address && touched.address && "invalidField"
 									}`}
-									id="seats"
-									name="seats"
-									placeholder="Seats"
 								/>
-								{errors.seats && touched.seats && (
+								{errors.address && touched.address && (
 									<ErrorMessage
-										name="seats"
+										name="name"
 										componint="div"
 										render={(msg) => <div className="errorMsg">{msg}</div>}
 									/>
@@ -255,4 +155,4 @@ const BookingForm = (props) => {
 	);
 };
 
-export default BookingForm;
+export default OrderForm;
